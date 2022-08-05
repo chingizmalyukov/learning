@@ -9,6 +9,7 @@ while True:
         break
     name = input('Имя гостя: ')
     if answer == 'ушел':
+        # TODO если имя окажется недопустимым, произойдёт ошибка. Нужно добавить проверку на наличие имени в списке
         guests.remove(name)
         print('Пока,', name)
     elif answer == 'пришел':
