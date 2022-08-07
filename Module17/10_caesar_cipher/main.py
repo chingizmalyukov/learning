@@ -8,11 +8,11 @@ def caesar_cipher(string, user_shift):
 
 
 alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-input_str = input('Введите строку: ')
+input_str_start = input('Введите строку: ')
 shift = int(input('Введите сдвиг: '))
+input_str = [symbol for symbol in input_str_start if symbol != '.']
 
 output_str = caesar_cipher(input_str, shift)
 
-print('Зашифрованная строка:', output_str)
+print('Зашифрованная строка:', output_str + input_str_start[len(input_str_start) -1])
 
-# TODO решение выдаёт ошибку ValueError: substring not found
