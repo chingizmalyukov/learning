@@ -6,6 +6,7 @@ def caesar_cipher(string, user_shift):
         new_str += i_char
     return new_str
 
+
 alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 input_str = input('Введите строку: ')
 shift = int(input('Введите сдвиг: '))
@@ -13,3 +14,5 @@ shift = int(input('Введите сдвиг: '))
 output_str = caesar_cipher(input_str, shift)
 
 print('Зашифрованная строка:', output_str)
+
+# TODO решение выдаёт ошибку ValueError: substring not found
