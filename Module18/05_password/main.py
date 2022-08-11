@@ -20,6 +20,7 @@ def check(password):
         return flag
     return flag
 
+
 while True:
     password = input('Введите пароль: ')
     if check(password) == True:
