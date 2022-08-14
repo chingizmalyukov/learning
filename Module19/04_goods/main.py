@@ -36,3 +36,21 @@ for product_name, product_code in goods.items():
         item_total_cost += item_quantity * item_cost
         item_total_quantity += item_quantity
     print('{0} - {1} шт, общая стоимость {2} рублей'.format(product_name, item_total_quantity, item_total_cost))
+
+# NOTE Работает верно, но решение можно улучшить. Используйте распаковку
+#  https://docs.python-guide.org/writing/style/#unpacking
+#  my_dict.items() выдает значения парами: ключ и значение. Пример:
+#        phone_numbers = {
+#            "дед": 89110001111,
+#            "репка": 89510002222,
+#            "жучка": 87770003333
+#        }
+#        for name, phone_numb in phone_numbers.items():					       # name - это ключ словаря,
+#            print(f'Персонаж "{name}" имеет номер телефона {phone_numb}')     # phone_number - значение по этому ключу
+#   .
+#   в результате:
+#        Персонаж "дед" имеет номер телефона 89110001111
+#        Персонаж "репка" имеет номер телефона 89510002222
+#        Персонаж "жучка" имеет номер телефона 87770003333
+#   .
+#   Итого, мы имеем доступ сразу и к ключу, и к значению
