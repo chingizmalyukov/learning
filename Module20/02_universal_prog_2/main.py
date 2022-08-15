@@ -1,4 +1,4 @@
-def isPrime(n):
+def is_prime(n):  # NOTE нейминг!
     if n == 1:
         return False
     if n % 2 == 0:
@@ -8,8 +8,7 @@ def isPrime(n):
         d += 2
     return d * d > n
 
-string =
 
-solution = [symbol for index, symbol in enumerate(string) if isPrime(index)]
-
+string = 'О Дивный Новый мир!'
+solution = [symbol for index, symbol in enumerate(string) if is_prime(index)]
 print(solution)

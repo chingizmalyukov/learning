@@ -18,12 +18,12 @@ students = {
         'interests': ['languages', 'health food']
     }
 }
-#иногда, проще снести все и построить заново
+# иногда, проще снести все и построить заново
 
 surname = sum([len(students[id]['surname']) for id, deep in students.items()])
 interests = [elem for _, deep in students.items() for elem in deep['interests']]
 id_age = list(zip([aidi for aidi, inside in students.items()],
-               [inside['age'] for aidi, inside in students.items()]))
+                  [inside['age'] for aidi, inside in students.items()]))
 
 print('Список пар "ID студента — возраст": ', id_age)
 print('Полный список интересов всех студентов', interests)
@@ -49,4 +49,3 @@ print('Общая длина всех фамилий студентов:', surna
 # my_lst = f(students)[0]
 # l = f(students)[1]
 # print(my_lst, l)
-
