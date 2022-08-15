@@ -1,4 +1,4 @@
-def check (tuple_sount)
+def check (tuple_sount):
     flag = True
     for num in tuple_sount:
         if num % round(num, 0) != 0:
@@ -8,6 +8,5 @@ def check (tuple_sount)
     if flag:
         print(tuple(sorted(tuple_sount)))
 
-# tuple_sount = (5, 2, -4, 6, 2, 1)
-# check(tuple_sount)
-# TODO код раскомментировать, исправить опечатку - так как он выдаёт синтаксическую ошибку
+tuple_sount = (5, 2, -4, 6, 2, 1)
+check(tuple_sount)

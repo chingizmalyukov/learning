@@ -10,4 +10,7 @@ def painting(string, num):
     else:
         print('пустой кортеж')
 
+string = (1, 2, 3, 4, 5, 6, 7, 8, 2, 2, 9, 10)
+num = 2
+painting(string, num)
 # TODO в коде нужно реализовать пример использования данного функционала

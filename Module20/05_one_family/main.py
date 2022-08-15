@@ -12,7 +12,8 @@ def comparison(surname, word):
         flag = True
     return flag
 
-database = {  # TODO в коде не хватает пары пустых строк по PEP8
+
+database = {
     ('Татьяна', 'Иванова'): 23,
     ('Иван', 'Иванов'): 21,
 }

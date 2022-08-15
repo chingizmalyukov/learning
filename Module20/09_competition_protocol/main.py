@@ -1,6 +1,6 @@
-database = {1: ['anon', 0],
-            2: ['anon', 0],
-            3: ['anon', 0]
+database = {1: [0, 'anon'],
+            2: [0, 'anon'],
+            3: [0, 'anon']
             }
 
 count = int(input('Сколько записей вносится в протокол? '))
@@ -10,7 +10,7 @@ step = 3
 for i in range(1, count + 1):
     result = input(f'{i}-я запись: ').split()
     for key, dat in database.items():
-        if int(dat[1]) < int(result[1]):
+        if int(dat[0]) < int(result[0]):
             if key == 1:
                 database[3][0] = database[2][0]
                 database[3][1] = database[2][1]
@@ -28,7 +28,8 @@ for i in range(1, count + 1):
                 dat[1] = result[1]
             break
 
+print('Итоги соревнований:')
 for i, info in database.items():
-    print(f'{i}-е место. {info[0]} ({info[1]})')
+    print(f'{i}-е место. {info[1]} ({info[0]})')
 
 # TODO см. LMS
