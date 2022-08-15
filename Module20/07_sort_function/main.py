@@ -1,4 +1,4 @@
-def check (tuple_sount):
+def check(tuple_sount):
     flag = True
     for num in tuple_sount:
         if num % round(num, 0) != 0:
@@ -7,6 +7,7 @@ def check (tuple_sount):
             break
     if flag:
         print(tuple(sorted(tuple_sount)))
+
 
 tuple_sount = (5, 2, -4, 6, 2, 1)
 check(tuple_sount)

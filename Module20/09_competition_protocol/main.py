@@ -31,5 +31,3 @@ for i in range(1, count + 1):
 print('Итоги соревнований:')
 for i, info in database.items():
     print(f'{i}-е место. {info[1]} ({info[0]})')
-
-# TODO см. LMS
