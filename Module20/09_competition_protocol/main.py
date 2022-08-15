@@ -31,3 +31,4 @@ for i in range(1, count + 1):
 for i, info in database.items():
     print(f'{i}-е место. {info[0]} ({info[1]})')
 
+# TODO см. LMS

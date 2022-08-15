@@ -9,3 +9,5 @@ def painting(string, num):
         print(string[string.index(num):])
     else:
         print('пустой кортеж')
+
+# TODO в коде нужно реализовать пример использования данного функционала
