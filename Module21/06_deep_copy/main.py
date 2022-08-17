@@ -11,6 +11,9 @@ site = {
     }
 }
 
+#идея в том, чтобы присваивать значения в копию словаря, "site". после этого
+#добавлять копию в список копий. после этого выводить список таких "копий".
+#но что-то не работает
 def change(site, count, site_list):
     if count == 0:
         return site_list
@@ -23,4 +26,4 @@ def change(site, count, site_list):
 
 count = 2#int(input('Сколько сайтов: '))
 site_list = []
-change(site.copy(), count, site_list)
+change(site.copy(), count, site_list[:])
