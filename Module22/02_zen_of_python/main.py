@@ -5,7 +5,7 @@ for i_elem in file:
 file.close()
 
 for string in reversed(text):
-    print(string, end='')
+    print(string)
 
 # TODO между первой и второй строкой отсутствует перенос:
 # Namespaces are one honking great idea -- let's do more of those!If the implementation is easy to explain, it may be a good idea.
