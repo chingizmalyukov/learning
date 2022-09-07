@@ -22,6 +22,8 @@ for key, value in dict_letters.items():
 file = open('analysis.txt', 'a')
 # прежде чем давать задания на СОРТИРОВКУ, неплохо было бы рассказать хоть что-то про данную функцию,
 # кроме "ну есть функция sorted, она сортирует"
+# NOTE сожалею: что данный момент вызвал негодование. Но здорово, что Вы смогли найти отличное решение!
+#  кстати, и по части сортировки решение как раз нужно немного доработать
 sorted_dict = dict((sorted(dict_letters.items(), key=lambda x: x[1], reverse=True)))
 
 for key, value in sorted_dict.items():
@@ -30,3 +32,7 @@ for key, value in sorted_dict.items():
     file.write(str(value))
     file.write('\n')
 file.close()
+
+# TODO статистика не упорядочена по алфавитному порядку
+#  по условию задания требуется соблюсти два правила сортировки
+#  для первого столбца и для второго
