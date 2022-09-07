@@ -16,7 +16,7 @@ result = {'size': 0,
           'dir_count': 0,
           'file_count': 0}
 
-start_path = input('Укажите путь к папке: ') #'X:\GIT\python_basic\Module14'
+start_path = input('Укажите путь к папке: ')  # 'X:\GIT\python_basic\Module14'
 check(start_path)
 
 print(f'Размер каталога (в Кб): {result["size"]}')
