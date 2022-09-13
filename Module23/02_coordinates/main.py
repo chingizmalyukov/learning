@@ -13,7 +13,7 @@ def f2(x, y):
     return y / x
 
 
-with open('coordinates.txt', 'r') as input, open('result.txt', 'a') as output:
+with open('coordinates.txt', 'r') as input, open('result.txt', 'w') as output:
     count = 1
     for line in input:
         function_num = 1
