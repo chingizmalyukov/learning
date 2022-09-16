@@ -1,6 +1,6 @@
 import random
 
-random.seed()
+random.seed()  # NOTE превосходно!
 
 
 class BlackJack:

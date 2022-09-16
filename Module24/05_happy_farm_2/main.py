@@ -33,6 +33,7 @@ class PotatoGarden:
                 potato.grow()
         else:
             print('Грядка пуста!\n')
+
     def are_all_ripe(self):
         self.potatos_ready = 0
         if all([i_potato.is_ripe() for i_potato in self.potatoes]):
@@ -62,9 +63,10 @@ class Gardener:
     def harvested_info(self):
         print('Количество собранной картошки: {}'.format(self.harvested_potatos))
 
+
 # Не очень понял что значит "ухаживать за грядкой", сделал так: при уходе за грядкой садовник собирает урожай,
 # если урожай не готов, то взращивает его.
-
+# NOTE Да, отличный подход к решению получился!
 
 garden = PotatoGarden(5)
 gardener = Gardener('Tomas')

@@ -82,3 +82,5 @@ for day in range(1, 366):
         petr.action()
     if oleg.status:
         oleg.action()
+
+# NOTE отличные сообщения в чате! Браво)

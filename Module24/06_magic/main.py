@@ -11,6 +11,7 @@
 # print(c.answer)
 # ЭТО ВЫ ВОТ ТАК ОБЪЯСНИЛИ ЦЕЛЫЙ МЕТОД __add__ О КОТОРОМ ДО ЭТОГО ВООБЩЕ НИСЛОВА НЕ БЫЛО??
 # В ОЧЕРЕДНОЙ РАЗ ПРИШЛОСЬ ГУГЛИТЬ ТЕОРИЮ
+# NOTE сожалею, что Вам пришлось с этим столкнуться
 
 class Water:
     def __add__(self, other):
@@ -20,7 +21,7 @@ class Water:
             return Steam()
         elif isinstance(other, Earth):
             return Dirt()
-        else:
+        else:  # NOTE эту ветку можно не писать. Если функция не попадёт ни в одну из веток, то по-умолчанию вернёт None
             return Another()
 
 
@@ -32,7 +33,7 @@ class Air:
             return Lightning()
         elif isinstance(other, Earth):
             return Dust()
-        else:
+        else:  # NOTE здесь и для всех остальных классов далее замечание аналогично замечанию в Water
             return Another()
 
 

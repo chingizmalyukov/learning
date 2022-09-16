@@ -29,7 +29,11 @@ student_10 = Student('десятый', 47, [random.randint(1, 5) for _ in range(
 student_list = [student_1, student_2, student_3, student_4, student_5, student_6,
                 student_7, student_8, student_9, student_10]
 
-sorted_list = sorted(student_list, key=lambda x: x.summ)
+for i_elem in student_list:  # NOTE хотим посмотреть студенческую ситуацию "до"
+    print(i_elem.name, i_elem.summ())
+print()
 
-for i_elem in sorted_list:
-    print(i_elem.name)
+sorted_list = sorted(student_list, key=lambda x: x.summ())  # NOTE в Python 3.9 без круглых скобок не сработало
+
+for i_elem in sorted_list:  # NOTE выводим более информативный ответ со студенческой ситуацией "после"
+    print(i_elem.name, i_elem.summ())

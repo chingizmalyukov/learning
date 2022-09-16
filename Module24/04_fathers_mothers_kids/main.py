@@ -43,8 +43,9 @@ class Child:
             self.name, self.age, self.rage, self.hungry
         ))
 
+
 john = Parent('John', 34)
-#baby = Child(john, 'Jo', 34) #вариант в котором выдаст ошибку про возраст ребенка
+# baby = Child(john, 'Jo', 34)  # вариант в котором выдаст ошибку про возраст ребенка
 jo = Child(john, 'Jo', 8, True, True)
 john.sayinfo()
 john.calm_down(jo)
