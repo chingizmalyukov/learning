@@ -124,8 +124,8 @@ class Lodger:
             self.food_up()
         else:
             eat = 30
-            if self.get_home().get_food <= eat:
-                eat = self.get_home().get.food
+            if self.get_home().get_food() <= eat:  # NOTE пример исправления ошибки. Далее - аналогичным образом
+                eat = self.get_home().get.food  # TODO опечатка: get.food -> get_food (+скобки, см. комментарий ниже)
                 print(f'В холодильнике всего {self.get_home().get_food}')
             self.set_hungry(eat)
             self.get_home().set_food(-eat)
@@ -261,9 +261,15 @@ print(f'Всего прожито дней: {home_1.get_days_lived()}'
       f'\nЕды скушано: {home_1.get_food_eaten()}'
       f'\nШуб куплено: {home_1.get_coats_bought()}')
 
-#возникает ошибка:
+# возникает ошибка:
 #   File "X:\GIT\python_basic\Module25\06_cohabitation_2\main.py", line 123, in eat
 #     if self.get_home().get_food <= 0:
 # TypeError: '<=' not supported between instances of 'method' and 'int'
 # на сколько понимаю, это связано с тем, что передается метод, а не значение
 # так и не понял как сделать, чтобы передовалось значение(
+
+# NOTE эта ошибка исправляется просто: во всех попытках обратиться к методу получения значения количества еды,
+#  нужно добавить круглые скобки. То есть, вместо self.get_home().get_food нужно записывать self.get_home().get_food()
+#  первый вариант записи - это обращение к полю класса, но так как у нас есть метод-геттер, то вызываем его.
+#  И логично, раз это метод, то ему присущи круглые скобки каждый раз, когда мы его вызываем.
+# Как минимум ещё в одном месте в коде возникнет подобная ошибка: при попытках вызова метода get_cat_food
