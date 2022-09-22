@@ -7,20 +7,27 @@ class Car:
     __y = 0
 
     def move(self, dist):
-        x = self.get_x() + dist * math.cos(self.get_angel())
+        print(f'Врум-Врум Машина приехала из точки [{self.get_x()},{self.get_y()}]', end=' ')
+        x = round(self.get_x() + dist * math.cos(self.get_angel()), 2)
         self.set_x(x)
-        y = self.get_y() + dist * math.sin(self.get_angel())
+        y = round(self.get_y() + dist * math.sin(self.get_angel()), 2)
         self.set_y(y)
+        print(f'в точку [{self.get_x()},{self.get_y()}]\n')
 
-    def change(self, turn):
+    def change(self):
+        print('Куда поворачиваем?')
+        turn = int(input('0 - налево, 1 - направо: '))
         if turn == 0:
+            word = 'налево'
             if self.get_angel() == 360:
                 self.set_angel(0)
                 self.change_angel(+90)
-        elif turn == 1:
+        else:
+            word = 'направо'
             if self.get_angel() == 0:
                 self.set_angel(360)
                 self.change_angel(-90)
+        print(f'Повернули {word}!\n')
 
     def set_x(self, x):
         self.__x = x
@@ -53,13 +60,19 @@ class Bus(Car):
     def get_passengers(self):
         return self.__passengers
 
+    def get_money(self):
+        return self.__money
+
     def move(self, dist):
-        x = self.get_x() + dist * math.cos(self.get_angel())
+        print(f'ИНФО: Кол-во пассажиров = {self.get_passengers()}'
+              f' | Кол-во заработанных денег = {self.get_money()}')
+        print(f'Автобус выехал из точки [{self.get_x()},{self.get_y()}]')
+        x = round(self.get_x() + dist * math.cos(self.get_angel()), 2)
         self.set_x(x)
-        y = self.get_y() + dist * math.sin(self.get_angel())
+        y = round(self.get_y() + dist * math.sin(self.get_angel()), 2)
         self.set_y(y)
 
-        out_passenger = int(input('Кол-во вышедших пассажиров:'))
+        out_passenger = int(input('Кол-во вышедших пассажиров: '))
         self.__passengers -= out_passenger
         if self.__passengers < 0:
             self.__passengers = 0
@@ -68,12 +81,29 @@ class Bus(Car):
         free_places = self.__max_passengers - self.get_passengers()
         if free_places < in_passenger:
             print(f'Места кончаются, можем взять только {free_places}')
-            self.__money += free_places * self.__ticket
-            self.__passengers += free_places
-        else:
-            self.__money += in_passenger * self.__ticket
-            self.__passengers += in_passenger
+            in_passenger = free_places
+        self.__money += in_passenger * self.__ticket
+        self.__passengers += in_passenger
+        print(f'Сумма оплаты за проезд = {in_passenger * self.__ticket}')
+        print(f'Автобус в точке [{self.get_x()},{self.get_y()}]\n')
 
-# поворот влево - 0, вправо - 1. не стал заморачиваться, сделал поворот на 90 градусов за раз.
-# NOTE очень бы хотелось в коде ещё пример использования реализованного функционала этих классов.
-#  чтобы стало возможным посмотреть, как всё это работает
+
+print('Cтартуем!')
+while True:
+    chose = int(input('Выберите транспортное средство(1 - машина, 2 - автобус, 3 выход): '))
+    if chose == 1:
+        transport = Car()
+        print('вы выбрали АВТОМОБИЛЬ!\n')
+    elif chose == 2:
+        transport = Bus()
+        print('вы выбрали АВТОБУС! \nАвтобус едет от остановки к остановке, каждый раз беря и высаживая пассажиров!\n')
+    else:
+        break
+    while True:
+        action = int(input('Выберите действие(1 - ехать, 2 - повернуть, 3 - выбрать другой транспорт): '))
+        if action == 1:
+            transport.move(1)
+        elif action == 2:
+            transport.change()
+        else:
+            break

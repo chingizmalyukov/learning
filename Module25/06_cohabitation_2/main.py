@@ -2,7 +2,6 @@ import random
 
 
 class Home:
-    __days_lived = 0
     __money = 100
     __food = 50
     __cat_food = 30
@@ -10,10 +9,8 @@ class Home:
     __food_eaten = 0
     __coats_bought = 0
     __money_earned = 0
+    __need_food = False
     __need_cat_food = False
-
-    def days_lived_up(self):
-        self.__days_lived += 1
 
     def set_money(self, money):
         self.__money += money
@@ -34,6 +31,14 @@ class Home:
         else:
             self.__need_cat_food = True
             print('У пушистого кончилась еда!')
+
+    def set_need_food(self):
+        if self.get_need_food():
+            self.__need_food = False
+            print('Еды закупили!')
+        else:
+            self.__need_food = True
+            print('Ой-ей, в доме кончается еда!')
 
     def food_eaten(self, food):
         self.__food_eaten += food
@@ -65,8 +70,8 @@ class Home:
     def get_money_earned(self):
         return self.__money_earned
 
-    def get_days_lived(self):
-        return self.__days_lived
+    def get_need_food(self):
+        return self.__need_food
 
     def get_need_cat_food(self):
         return self.__need_cat_food
@@ -118,30 +123,33 @@ class Lodger:
     def pet(self):
         self.set_happy(5)
         print(f'{self.get_name()} гладит кота, счастье теперь = {self.get_happy()}')
+        self.hangry_down()
 
     def eat(self):
-        if self.get_home().get_food <= 0:
+        if self.get_home().get_need_food():
             self.food_up()
         else:
             eat = 30
-            if self.get_home().get_food() <= eat:  # NOTE пример исправления ошибки. Далее - аналогичным образом
-                eat = self.get_home().get.food  # TODO опечатка: get.food -> get_food (+скобки, см. комментарий ниже)
-                print(f'В холодильнике всего {self.get_home().get_food}')
+            if self.get_home().get_food() <= eat:
+                if not self.get_home().get_need_food():
+                    self.get_home().set_need_food()
+                eat = self.get_home().get_food()
+                print(f'В холодильнике всего {self.get_home().get_food()}')
             self.set_hungry(eat)
             self.get_home().set_food(-eat)
             self.get_home().food_eaten(eat)
             print(f'{self.get_name()} кушает, теперь сытость = {self.get_hungry()},'
-                  f' а еды в доме = {self.get_home().get_food}')
+                  f' а еды в доме = {self.get_home().get_food()}')
 
     def day(self):
-        self.get_home().days_lived_up()
-        print(f'\nДень {self.get_home().get_days_lived()}')
+        print(f'{self.get_name()}:')
         if self.get_hungry() <= self.get_happy() - 10:
             if self.get_hungry() <= 40:
                 self.eat()
-        else:
-            if self.get_happy() <= 60:
+            else:
                 self.happy_up()
+        else:
+            self.happy_up()
         if self.get_hungry() < 0:
             print(f'{self.get_name()} умирает от голода! Игра окончена =(')
             self.dead()
@@ -160,19 +168,22 @@ class Lodger:
 
 class Husband(Lodger):
     def happy_up(self):
-        choise = random.randint(1, 2)
-        if choise == 1:
-            self.set_happy(20)
-            self.hangry_down()
-            print(f'Муж принимает ответственное решение поиграть в компьютер!(счастье теперь {self.get_happy()}')
+        if self.get_home().get_money() < 100:
+            self.food_up()
         else:
-            self.pet()
+            choise = random.randint(1, 2)
+            if choise == 1:
+                self.set_happy(20)
+                print(f'Муж принимает ответственное решение поиграть в компьютер!(счастье теперь {self.get_happy()})')
+                self.hangry_down()
+            else:
+                self.pet()
 
     def food_up(self):
         self.get_home().set_money(150)
-        self.get_home().get_money_earned(150)
-        self.hangry_down()
+        self.get_home().money_earned(150)
         print(f'{self.get_name()} поработал, теперь денег в доме {self.get_home().get_money()}')
+        self.hangry_down()
 
 
 class Wife(Lodger):
@@ -181,6 +192,7 @@ class Wife(Lodger):
         if self.get_home().get_money() == 0:
             self.clean_up()
         else:
+            self.get_home().set_need_food()
             food = 100
             if self.get_home().get_money() < food:
                 food = self.get_home().get_money()
@@ -188,63 +200,79 @@ class Wife(Lodger):
             self.get_home().set_food(food)
             self.get_home().set_money(-food)
             print(f'{self.get_name()} покупает {food} еды!')
-            if self.get_home().get_need_cat_food():
+            if self.get_home().get_need_cat_food() or self.get_home().get_cat_food() <= 10:
                 print('У кота закончилась еда, берем ему тоже!')
-                cat_food = 30
+                cat_food = 60
                 if self.get_home().get_money() < cat_food:
                     cat_food = self.get_home().get_money()
                     print(f'Денег мало, по этому купим всего {cat_food} еды для пушистого.')
                 self.get_home().set_cat_food(cat_food)
-                if cat_food != 0:
+                if cat_food > 0:
                     self.get_home().set_need_cat_food()
             self.hangry_down()
 
     def happy_up(self):
-        if self.get_home().get_money() >= 350:
-            self.get_home().set_money(-350)
-            self.set_happy(60)
-            self.get_home().get_coats_bought()
-            self.hangry_down()
-            print(f'{self.get_name()} покупает ШУБУ!, теперь ее счастье несоизмеримо и равно {self.get_happy()}'
-                  f'\nА денег в доме остается {self.get_home().get_money()}')
+        if self.get_home().get_need_food() or self.get_home().get_need_cat_food():
+            self.food_up()
         else:
-            self.pet()
-            print(f'Денег на шубу нет, пойду кота поглажу хоть.(уровень счастья = {self.get_happy()}')
+            if self.get_happy() <= 60:
+                if self.get_home().get_money() >= 350:
+                    self.get_home().set_money(-350)
+                    self.set_happy(60)
+                    self.get_home().coats_bought()
+                    print(f'{self.get_name()} покупает ШУБУ!, теперь ее счастье несоизмеримо и равно {self.get_happy()}'
+                          f'\nА денег в доме остается {self.get_home().get_money()}')
+                    self.hangry_down()
+                else:
+                    print(f'Денег на шубу нет, пойду кота поглажу хоть.(уровень счастья = {self.get_happy()}')
+                    self.pet()
+            else:
+                if self.get_home().get_dirt() >= 90:
+                    self.clean_up()
+                else:
+                    print('Жене нечем заняться, она гладит кота.')
+                    self.pet()
 
     def clean_up(self):
         anti_dirt = 100
         if self.get_home().get_dirt() < anti_dirt:
             anti_dirt = self.get_home().get_dirt()
         self.get_home().set_dirt(-anti_dirt)
-        self.hangry_down()
         print(f'{self.get_name()} убралась, теперь в доме {self.get_home().get_dirt()} грязи')
+        self.hangry_down()
 
 
 class Cat(Lodger):
     def eat(self):
-        if self.get_home().get_cat_food == 0:
+        if self.get_home().get_cat_food() == 0:
             self.sleep()
             self.get_home().set_need_cat_food()
         else:
             eat = 10
-            if self.get_home().get_cat_food <= eat:
-                eat = self.get_home().get_cat_food
-                print(f'Еды у кота всего {self.get_home().get_cat_food}')
+            if self.get_home().get_cat_food() <= eat:
+                eat = self.get_home().get_cat_food()
+                print(f'Еды у кота всего {self.get_home().get_cat_food()}')
                 self.get_home().set_need_cat_food()
-            self.set_hungry(eat)
+            self.set_hungry(eat * 2)
             self.get_home().set_cat_food(-eat)
             print(f'КОТ кушает, теперь его сытость = {self.get_hungry()},'
-                  f' а кошачьей еды в доме = {self.get_home().get_cat_food}')
+                  f' а кошачьей еды в доме = {self.get_home().get_cat_food()}')
+            if self.get_home().get_cat_food() == 0 and not self.get_home().set_need_cat_food():
+                self.get_home().set_need_cat_food()
 
     def sleep(self):
-        self.hangry_down()
         print('Кот решает поспать!')
+        self.hangry_down()
 
     def happy_up(self):
-        self.set_happy(30)
-        self.get_home().set_dirt(5)
-        print(f'Кот дерет обои! Уровень грязи в доме вырастает до {self.get_home().get_dirt()},'
-              f'\n А уровень счастья кота до {self.get_happy()}')
+        if self.get_happy() > 80:
+            self.sleep()
+        else:
+            self.set_happy(30)
+            self.get_home().set_dirt(5)
+            print(f'Кот дерет обои! Уровень грязи в доме вырастает до {self.get_home().get_dirt()},'
+                  f'\n А уровень счастья кота до {self.get_happy()}')
+            self.hangry_down()
 
 
 home_1 = Home()
@@ -253,11 +281,11 @@ wife_1 = Wife('Жена', home_1)
 cat_1 = Cat('Кот', home_1)
 
 for day in range(1, 366):
+    print(f'\n**********День {day}**********')
     if husband_1.day() or wife_1.day() or cat_1.day():
         break
 
-print(f'Всего прожито дней: {home_1.get_days_lived()}'
-      f'\nДенег заработано: {home_1.get_money_earned()}'
+print(f'\nДенег заработано: {home_1.get_money_earned()}'
       f'\nЕды скушано: {home_1.get_food_eaten()}'
       f'\nШуб куплено: {home_1.get_coats_bought()}')
 
