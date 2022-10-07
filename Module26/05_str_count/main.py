@@ -27,6 +27,8 @@ def file_check(start_path):
         # else:
         #     if file_path[len(file_path) - 3:] == '.py':
         #         yield file_path
+        # NOTE Здесь если функцию делать рекурсивной (для обхода вложенных директорий),
+        #  то в первый yield нужно передавать наименование директории, а во второй - количество строк.
         if file_path[len(file_path) - 3:] == '.py':
             yield file_path
 

@@ -1,5 +1,6 @@
 from typing import Any, Optional
 
+
 class Node:
     def __init__(self, value: Optional[Any] = None, next: Optional['Node'] = None) -> None:
         self.value = value
@@ -9,6 +10,7 @@ class Node:
         return 'Node [{value}]'.format(
             value=str(self.value)
         )
+
 
 class LinkedList:
     def __init__(self) -> None:
@@ -24,6 +26,7 @@ class LinkedList:
                 values.append(str(current.value))
             return '[{values}]'.format(values=' '.join(values))
         return 'LinkedList []'
+
     def append(self, elem: Any) -> None:
         new_node = Node(elem)
         if self.head in None:
@@ -35,7 +38,16 @@ class LinkedList:
             last = last.next
         last.next = new_node
         self.length += 1
-    def remove(self, index) -> None:
+
+    def remove(self, index) -> None:  # TODO да, практически  -> Optional[Any]:
+        # TODO далее нужно задать счётчик,который будет пробегаться по индексам и "головной" элемент, который сдвигается
+        #  например temp = self.head
+        #  Далее чтобы получить нужный элемент нужно задать цикл while с условием count != index
+        #  То есть пока не дойдём до элемента с нужным индексом
+        #  Сдвиг элемента на каждой итерации происходит за счёт операции temp = temp.next
+        #  Далее если temp is None, то возвращаем None (чтоб избежать тут появления ошибки)
+        #  И последней операцией в этом цикле должно быть увеличение счётчика на единицу.
+        #  Как только цикл закончится, нужно вернуть значение элемента, до которого удалось в цикле дойти.
         cur_node = self.head
         cur_index = 0
         if self.length == 0 or self.length <= index:
@@ -57,7 +69,8 @@ class LinkedList:
         prev.next = cur_node.next
         self.length -= 1
 
-#Переписал задачу с разбора ДЗ, проверил дважды. в разборе работае, у меня - нет!
+
+# Переписал задачу с разбора ДЗ, проверил дважды. в разборе работает, у меня - нет!
 
 my_list = LinkedList()
 my_list.append(10)

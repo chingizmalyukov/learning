@@ -12,7 +12,8 @@ class Iterator:
             self.step += 1
             return self.step ** 2
         else:
-            raise Exception('Числа закончились!')  # как остановить итератор по-другому, не через ошибку?
+            # raise Exception('Числа закончились!')  # как остановить итератор по-другому, не через ошибку?
+            raise StopIteration  # NOTE используйте другой класс исключения
 
 
 def generator(n):
