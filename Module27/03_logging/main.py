@@ -16,6 +16,7 @@ def logging(funct: Callable) -> Callable:
         except Exception as error:
             error_text = error
             # как убрать миллисекунды в выводе времени?
+            # например, воспользовавшись функцией time.strftime('%d.%m.%Y %H:%M:%S') и вместо этого записать её без :%S
             message = ('{time}: Функция {name} не выполнилась! \nтекст ошибки: {error}'.format(
                 time=datetime.now(),
                 name=funct.__name__,

@@ -1,6 +1,5 @@
 import time
-from typing import Callable
-import functools
+from typing import Callable, Any
 
 
 def time_sleep(funct: Callable) -> Callable:
@@ -9,8 +8,14 @@ def time_sleep(funct: Callable) -> Callable:
     # а каким образом можно выводить отсчет до старта?
     # пробовал через цикл, но он сразу вываливает все принты =(
 
-    time.sleep(3)
-    return funct
+    def wrapped_func(*args, **kwargs) -> Any:  # NOTE например, добавив декоратор =)
+        for i_time in range(5, 0, -1):
+            print(i_time, end=' ')
+            time.sleep(1)
+        print()
+        return funct(*args, **kwargs)
+
+    return wrapped_func
 
 
 @time_sleep
