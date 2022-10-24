@@ -3,7 +3,6 @@ import math
 
 class MyMath:
     """Класс с формулами из математики"""
-    import math
 
     @classmethod
     def circle_len(cls, radius: int) -> float:
