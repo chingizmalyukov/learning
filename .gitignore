@@ -611,6 +611,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 test.py
+test1.py
 /test2.py
 /words.txt
 /words.txt
