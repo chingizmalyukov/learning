@@ -10,3 +10,5 @@ def can_be_poly(text):
 
 print(can_be_poly('abcba'))
 print(can_be_poly('abbbc'))
+
+# после объяснения работы Counter, сделал задачу минут за 10, играя в телефон параллельно
