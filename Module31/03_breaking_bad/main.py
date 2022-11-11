@@ -19,3 +19,6 @@ with open('death_count.txt', 'w') as file:
     file.write(f'(Сезон, Серия): {solution}, кол-во смертей: {episodes_count[solution]}\n')
 
 # Чтобы решить данную задачу - нужен VPN!!!!!!
+# TODO сожалею об этом факте. Уже передала создателям курса.
+#  И в ответе ошибка. Верно 2 сезон, 13 эпизод, в котором количество смертей - 167
+#  Это 'Unnamed passengers on the Wayfarer 515 and JM 21 flights'
